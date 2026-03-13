@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude auth:*)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)",
+      "Bash(npm --version)",
+      "Bash(command -v brew)",
+      "Bash(brew list:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(/tmp/node-v20.11.0-darwin-arm64/bin/node --version)",
+      "Bash(/tmp/node-v20.11.0-darwin-arm64/bin/npm --version)",
+      "Bash(/Users/ciarannorris/.local/bin/node -e \"console.log\\(process.execPath\\)\")",
+      "Bash(/Users/ciarannorris/.local/bin/node -e \"require\\(''child_process''\\).execSync\\(''ls /tmp/node-v22.14.0-darwin-arm64/bin/'', {stdio:''inherit''}\\)\")",
+      "Bash(/Users/ciarannorris/.local/bin/node /tmp/node-v22.14.0-darwin-arm64/bin/npm --version)",
+      "Read(//tmp/node-v22.14.0-darwin-arm64/bin/**)",
+      "Read(//Users/ciarannorris/.nvm/versions/**)",
+      "Read(//Users/ciarannorris/.fnm/**)",
+      "Read(//Users/ciarannorris/.volta/**)",
+      "Bash(brew --version)",
+      "Bash(mkdir -p /tmp/node-fresh)",
+      "Bash(tar -xzf /tmp/node-fresh.tar.gz -C /tmp/node-fresh --strip-components=1)",
+      "Bash(/tmp/node-fresh/bin/node --version)",
+      "Bash(/tmp/node-fresh/bin/npm --version)",
+      "Bash(/tmp/node-fresh/bin/npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)",
+      "Bash(mkdir -p /tmp/nextapp)",
+      "Read(//tmp/**)",
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)",
+      "Bash(rm -rf /tmp/nextapp)",
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npm install framer-motion)",
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npx shadcn@latest init --yes --defaults)"
+    ]
+  }
+}
