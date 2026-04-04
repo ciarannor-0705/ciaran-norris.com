@@ -35,6 +35,9 @@ const libreBaskerville = Libre_Baskerville({
 export const metadata: Metadata = {
   title: "Ciaran Norris",
   description: "Personal website of Ciaran Norris",
+  icons: {
+    icon: "/ciaran flavicon.jpeg",
+  },
 };
 
 export default function RootLayout({
