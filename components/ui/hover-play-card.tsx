@@ -33,7 +33,7 @@ export default function HoverPlayCard({
 
   return (
     <span
-      className="relative inline-block cursor-default"
+      className="relative inline-block cursor-pointer"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
