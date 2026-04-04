@@ -3,7 +3,7 @@
 import { motion, useAnimation, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const ease = [0.16, 1, 0.3, 1];
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 interface HeroBadgeProps {
   text: string;
