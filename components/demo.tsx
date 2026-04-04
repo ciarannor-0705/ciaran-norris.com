@@ -298,7 +298,7 @@ const ContactContent = () => (
         contact
       </BlurTextEffect>
     </h1>
-    {["e: ciaran.nor@gmail.com", "t: +49 176 70138258"].map((item, i) => (
+    {["e: ciaran.nor@gmail.com"].map((item, i) => (
       <motion.p
         key={i}
         className="text-xl text-black/80 leading-relaxed"
