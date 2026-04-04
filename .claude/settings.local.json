@@ -28,7 +28,26 @@
       "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)",
       "Bash(rm -rf /tmp/nextapp)",
       "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npm install framer-motion)",
-      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npx shadcn@latest init --yes --defaults)"
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npx shadcn@latest init --yes --defaults)",
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/npm run build)",
+      "Bash(PATH=\"/tmp/node-fresh/bin:$PATH\" /tmp/node-fresh/bin/node /Users/ciarannorris/personal-website/node_modules/next/dist/bin/next build)",
+      "Bash(npx --version)",
+      "Read(//Users/ciarannorris/.local/**)",
+      "Bash(mkdir -p /Users/ciarannorris/.local/lib/node_modules)",
+      "Bash(cp -r /tmp/node-fresh/lib/node_modules/npm /Users/ciarannorris/.local/lib/node_modules/npm)",
+      "Bash(/Users/ciarannorris/.local/bin/npx:*)",
+      "Bash(chmod +x /Users/ciarannorris/.local/bin/npx)",
+      "Bash(ln -s ../next/dist/bin/next /Users/ciarannorris/personal-website/node_modules/.bin/next)",
+      "Bash(node node_modules/next/dist/bin/next build)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(open http://localhost:3000)",
+      "Bash(ls /Users/ciarannorris/personal-website/public/*.png)",
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/typescript/bin/tsc --noEmit)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
