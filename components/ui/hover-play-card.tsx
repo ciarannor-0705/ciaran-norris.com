@@ -19,6 +19,7 @@ export default function HoverPlayCard({
 }: HoverPlayCardProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isHovering, setIsHovering] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -33,9 +34,9 @@ export default function HoverPlayCard({
 
   return (
     <span
-      className="relative inline-block cursor-pointer"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      className="relative inline-block"
+      onMouseEnter={() => { setIsHovering(true); setHovered(true); }}
+      onMouseLeave={() => { setIsHovering(false); setHovered(false); }}
     >
       <AnimatePresence>
         {isHovering && (
@@ -59,7 +60,10 @@ export default function HoverPlayCard({
           </motion.div>
         )}
       </AnimatePresence>
-      <span className="underline decoration-black/20 underline-offset-2">football</span>
+      <span
+        className="cursor-pointer underline decoration-black/30 underline-offset-2 transition-all"
+        style={{ opacity: hovered ? 0.6 : 1 }}
+      >football</span>
     </span>
   );
 }
