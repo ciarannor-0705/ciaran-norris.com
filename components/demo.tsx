@@ -76,7 +76,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   const storyLines: (string | React.ReactNode)[] = [
     <>I grew up near Münster, tryharding in <HoverPlayCard src="/fußball goat.mov" /> and enjoying life as a teenager. One day, during my final year at school, I came across a YouTube video about making money online.</>,
     "So I dug into web design and ended up closing several craft businesses and scaling my agency to a solid amount of money for a 17 year old.",
-    <>After a boring 9 to 5 in my gap year, I went to Mannheim to study business and really got into startups through <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />. I interned at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and soon <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} /> will be my next station.</>,
+    <>After a boring 9 to 5 in my gap year, I went to Mannheim to study business and really got into startups through <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />. I interned at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} /> will be my next station.</>,
     "These times are super exciting, and the opportunity cost of being stuck in uni instead of building at the hottest startups scares me. So lets get out there and build. LFG!",
   ]
 
@@ -132,7 +132,7 @@ const experiences: Experience[] = [
   },
   {
     id: "inca",
-    title: "CEO Office Intern",
+    title: "Founders Associate Intern",
     logo: "/inca logo icon.png",
     fullLogo: "/inca full logo.png",
     content: "",
@@ -243,7 +243,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
               >
                 <button
                   onClick={() => setOpenId(null)}
-                  className="absolute top-3 right-4 text-black/30 hover:text-black transition-colors text-sm"
+                  className="absolute top-3 right-4 text-black/30 hover:text-black transition-colors text-sm cursor-pointer"
                 >
                   ✕
                 </button>
