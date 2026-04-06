@@ -16,15 +16,15 @@ export const BlurTextEffect: React.FC<BlurTextEffectProps> = ({ children, classN
 
     const chars = containerRef.current.querySelectorAll('span.char');
 
-    gsap.set(chars, { opacity: 0, y: 10, filter: 'blur(8px)' });
+    gsap.set(chars, { opacity: 0, y: 6, filter: 'blur(4px)' });
 
     gsap.to(chars, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.6,
+      duration: 0.3,
       ease: 'power2.out',
-      stagger: 0.04,
+      stagger: 0.02,
       clearProps: 'filter',
     });
   }, [children]);

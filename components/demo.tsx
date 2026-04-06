@@ -18,35 +18,36 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
   const [hovered, setHovered] = React.useState(false)
   return (
-    <span
-      className="relative inline-block cursor-default"
+    <a
+      href={linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative inline-block cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <AnimatePresence>
         {hovered && (
-          <motion.a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.div
             className="absolute bottom-full left-1/2 -translate-x-1/2 mb-0.5 z-50"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            onClick={(e) => e.stopPropagation()}
-            whileHover={{ scale: 1.1 }}
           >
             <Avatar className="h-7 w-7 rounded-full ring-1 ring-black/10 shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <AvatarImage src={photo} alt={name} />
               <AvatarFallback>{fallback}</AvatarFallback>
             </Avatar>
-          </motion.a>
+          </motion.div>
         )}
       </AnimatePresence>
-      <span className="underline decoration-black/20 underline-offset-2">{name}</span>
-    </span>
+      <span
+        className="underline decoration-black/20 underline-offset-2 transition-colors"
+        style={{ color: hovered ? "rgba(0,0,0,0.45)" : "inherit" }}
+      >{name}</span>
+    </a>
   )
 }
 
@@ -91,11 +92,11 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
         {storyLines.map((line, i) => (
           <motion.p
             key={i}
-            className="text-xl text-black/80 leading-relaxed text-justify"
+            className="text-xl text-black/80 leading-relaxed"
             style={interStyle}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 + i * 0.1 }}
+            transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
           >
             {line}
           </motion.p>
@@ -203,15 +204,21 @@ ExperienceTitle.displayName = "ExperienceTitle"
 const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOpenId: (id: string | null) => void }) => {
   const activeExp = experiences.find((e) => e.id === openId)
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenId(null) }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [setOpenId])
+
   return (
     <div className="flex flex-col gap-3">
       <ExperienceTitle />
       <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `${experiences.length * 72}px` }}>
         {experiences.map((exp, i) => (
           <motion.div key={exp.id} className="flex items-center justify-between w-full border border-black/10 hover:border-black/30 rounded-lg px-4 py-4 cursor-pointer transition-colors" onClick={() => setOpenId(exp.id)}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 + i * 0.1 }}
+            transition={{ duration: 0.2, ease: "easeOut", delay: i * 0.04 }}
           >
             <HeroBadge
               text={exp.title}
@@ -272,9 +279,8 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
                 <motion.div
                   className="absolute top-0 bottom-0 left-full ml-5 z-50 flex items-center"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ type: "spring", bounce: 0.15, duration: 0.5, delay: 0.25 }}
+                  animate={{ opacity: 1, y: 0, transition: { type: "spring", bounce: 0.15, duration: 0.5, delay: 0.25 } }}
+                  exit={{ opacity: 0, y: 20, transition: { type: "spring", bounce: 0.1, duration: 0.35 } }}
                   style={{ width: 240 }}
                   onClick={(e) => e.stopPropagation()}
                 >
@@ -303,9 +309,9 @@ const ContactContent = () => (
         key={i}
         className="text-xl text-black/80 leading-relaxed"
         style={interStyle}
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 + i * 0.1 }}
+        transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
       >
         {item}
       </motion.p>
