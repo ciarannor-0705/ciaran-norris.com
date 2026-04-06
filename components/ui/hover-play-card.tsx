@@ -41,12 +41,12 @@ export default function HoverPlayCard({
       <AnimatePresence>
         {isHovering && (
           <motion.div
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 rounded-xl overflow-hidden shadow-lg"
+            className="absolute bottom-full right-0 mb-2 z-50 rounded-xl overflow-hidden shadow-lg"
             initial={{ opacity: 0, y: 6, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            style={{ width: 200 }}
+            style={{ width: 150 }}
           >
             <video
               ref={videoRef}

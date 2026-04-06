@@ -394,7 +394,7 @@ const DemoOne = () => {
               </div>
 
               {/* Content — centered in full viewport */}
-              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 py-16 pb-24 md:pb-16 overflow-y-auto">
+              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 py-16 md:pb-16 pb-[80px] overflow-y-auto overflow-x-hidden" style={{ marginBottom: 0 }}>
                 <div className="w-full max-w-3xl">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
