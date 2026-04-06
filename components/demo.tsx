@@ -84,7 +84,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   return (
     <div className="flex flex-col gap-3">
       <h1 className="mb-8 text-left" style={interStyle}>
-        <BlurTextEffect className="text-5xl font-bold text-black">
+        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
           quick intro
         </BlurTextEffect>
       </h1>
@@ -92,7 +92,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
         {storyLines.map((line, i) => (
           <motion.p
             key={i}
-            className="text-xl text-black/80 leading-relaxed"
+            className="text-base md:text-xl text-black/80 leading-relaxed"
             style={interStyle}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ const experiences: Experience[] = [
 
 const ExperienceTitle = React.memo(() => (
   <h1 className="mb-8 text-left" style={interStyle}>
-    <BlurTextEffect className="text-5xl font-bold text-black">
+    <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
       experience
     </BlurTextEffect>
   </h1>
@@ -277,7 +277,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
               {/* Sidebar cards — float to the right of the popup */}
               {activeExp.sidebar && (
                 <motion.div
-                  className="absolute top-0 bottom-0 left-full ml-5 z-50 flex items-center"
+                  className="hidden md:flex absolute top-0 bottom-0 left-full ml-5 z-50 items-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0, transition: { type: "spring", bounce: 0.15, duration: 0.5, delay: 0.25 } }}
                   exit={{ opacity: 0, y: 20, transition: { type: "spring", bounce: 0.1, duration: 0.35 } }}
@@ -300,14 +300,14 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
 const ContactContent = () => (
   <div className="flex flex-col gap-3">
     <h1 className="mb-8 text-left" style={interStyle}>
-      <BlurTextEffect className="text-5xl font-bold text-black">
+      <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
         contact
       </BlurTextEffect>
     </h1>
     {["e: ciaran.nor@gmail.com"].map((item, i) => (
       <motion.p
         key={i}
-        className="text-xl text-black/80 leading-relaxed"
+        className="text-base md:text-xl text-black/80 leading-relaxed"
         style={interStyle}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -350,13 +350,22 @@ const DemoOne = () => {
             className="absolute inset-0 z-10 flex items-center justify-center"
             exit={{ y: -80, opacity: 0, transition: { duration: 0.7, ease: "easeInOut" } }}
           >
-            <GradualSpacing
-              text="Ciaran Norris"
-              duration={0.8}
-              delayMultiple={0.06}
-              className="text-9xl font-bold leading-none text-black"
-              style={{ fontFamily: "var(--font-inter), sans-serif" }}
-            />
+            <div className="flex flex-col items-center md:block">
+              <GradualSpacing
+                text="Ciaran"
+                duration={0.8}
+                delayMultiple={0.06}
+                className="text-6xl md:text-9xl font-bold leading-none text-black block"
+                style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              />
+              <GradualSpacing
+                text="Norris"
+                duration={0.8}
+                delayMultiple={0.06}
+                className="text-6xl md:text-9xl font-bold leading-none text-black block"
+                style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -375,8 +384,8 @@ const DemoOne = () => {
               onValueChange={(val) => { setActiveTab(val); setOpenId(null); }}
               orientation="vertical"
             >
-              {/* Side nav — absolute left */}
-              <div className="absolute left-0 top-0 bottom-0 flex items-center px-8 py-16 z-50">
+              {/* Side nav — desktop only */}
+              <div className="hidden md:flex absolute left-0 top-0 bottom-0 items-center px-8 py-16 z-50">
                 <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/55 [&_[data-slot=tabs-tab]]:transition-colors">
                   <TabsTab value="story" style={tabStyle}>intro</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
@@ -385,7 +394,7 @@ const DemoOne = () => {
               </div>
 
               {/* Content — centered in full viewport */}
-              <div className="w-full h-full flex items-center justify-center px-16 py-16 overflow-y-auto">
+              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 py-16 pb-24 md:pb-16 overflow-y-auto">
                 <div className="w-full max-w-3xl">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
@@ -393,6 +402,24 @@ const DemoOne = () => {
                 </div>
               </div>
             </Tabs>
+            {/* Mobile bottom nav — plain buttons, outside Tabs */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
+              {["story", "experience", "contact"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setActiveTab(tab); setOpenId(null); }}
+                  className="cursor-pointer transition-colors text-base font-medium"
+                  style={{
+                    ...tabStyle,
+                    color: activeTab === tab ? "black" : "rgba(0,0,0,0.4)",
+                    borderBottom: activeTab === tab ? "1.5px solid black" : "none",
+                    paddingBottom: 2,
+                  }}
+                >
+                  {tab === "story" ? "intro" : tab}
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
