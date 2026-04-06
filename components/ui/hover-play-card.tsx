@@ -62,7 +62,7 @@ export default function HoverPlayCard({
       </AnimatePresence>
       <span
         className="cursor-pointer underline decoration-black/30 underline-offset-2 transition-all"
-        style={{ opacity: hovered ? 0.6 : 1 }}
+        style={{ opacity: hovered ? 0.7 : 1 }}
       >football</span>
     </span>
   );

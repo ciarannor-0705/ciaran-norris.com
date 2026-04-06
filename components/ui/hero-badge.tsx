@@ -48,7 +48,7 @@ export default function HeroBadge({
   return (
     <motion.button
       onClick={onClick}
-      className="group flex items-center cursor-pointer"
+      className="group flex items-center cursor-pointer outline-none focus:outline-none"
       onHoverStart={() => controls.start("hover")}
       onHoverEnd={() => controls.start("initial")}
     >

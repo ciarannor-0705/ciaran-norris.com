@@ -45,7 +45,7 @@ const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; ph
       </AnimatePresence>
       <span
         className="underline decoration-black/20 underline-offset-2 transition-colors"
-        style={{ color: hovered ? "rgba(0,0,0,0.45)" : "inherit" }}
+        style={{ color: hovered ? "rgba(0,0,0,0.55)" : "inherit" }}
       >{name}</span>
     </a>
   )
@@ -66,7 +66,7 @@ const CompanyLink = ({ name, id, onOpen }: { name: string; id: string; onOpen: (
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="cursor-pointer underline decoration-black/30 underline-offset-2 transition-all"
-      style={{ opacity: hovered ? 0.6 : 1 }}
+      style={{ opacity: hovered ? 0.7 : 1 }}
     >
       {name}
     </span>
@@ -321,7 +321,6 @@ const ContactContent = () => (
 
 const tabStyle = {
   fontFamily: "var(--font-inter), sans-serif",
-  color: "black",
   fontWeight: 500,
 }
 
@@ -373,12 +372,12 @@ const DemoOne = () => {
             <Tabs
               className="w-full h-full flex-row relative"
               value={activeTab}
-              onValueChange={setActiveTab}
+              onValueChange={(val) => { setActiveTab(val); setOpenId(null); }}
               orientation="vertical"
             >
               {/* Side nav — absolute left */}
-              <div className="absolute left-0 top-0 bottom-0 flex items-center px-8 py-16">
-                <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:hover:bg-black/5">
+              <div className="absolute left-0 top-0 bottom-0 flex items-center px-8 py-16 z-50">
+                <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/55 [&_[data-slot=tabs-tab]]:transition-colors">
                   <TabsTab value="story" style={tabStyle}>intro</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
                   <TabsTab value="contact" style={tabStyle}>contact</TabsTab>
