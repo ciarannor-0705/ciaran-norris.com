@@ -350,19 +350,28 @@ const DemoOne = () => {
             className="absolute inset-0 z-10 flex items-center justify-center"
             exit={{ y: -80, opacity: 0, transition: { duration: 0.7, ease: "easeInOut" } }}
           >
-            <div className="flex flex-col items-center md:block">
+            <div className="md:hidden flex flex-col items-center">
               <GradualSpacing
                 text="Ciaran"
                 duration={0.8}
                 delayMultiple={0.06}
-                className="text-6xl md:text-9xl font-bold leading-none text-black block"
+                className="text-6xl font-bold leading-none text-black block"
                 style={{ fontFamily: "var(--font-inter), sans-serif" }}
               />
               <GradualSpacing
                 text="Norris"
                 duration={0.8}
                 delayMultiple={0.06}
-                className="text-6xl md:text-9xl font-bold leading-none text-black block"
+                className="text-6xl font-bold leading-none text-black block"
+                style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              />
+            </div>
+            <div className="hidden md:block">
+              <GradualSpacing
+                text="Ciaran Norris"
+                duration={0.8}
+                delayMultiple={0.06}
+                className="text-9xl font-bold leading-none text-black"
                 style={{ fontFamily: "var(--font-inter), sans-serif" }}
               />
             </div>
@@ -394,7 +403,7 @@ const DemoOne = () => {
               </div>
 
               {/* Content — centered in full viewport */}
-              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 py-16 md:pb-16 pb-[80px] overflow-y-auto overflow-x-hidden" style={{ marginBottom: 0 }}>
+              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 md:py-16 pt-16 pb-[80px] overflow-y-auto overflow-x-hidden md:overflow-x-auto">
                 <div className="w-full max-w-3xl">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
