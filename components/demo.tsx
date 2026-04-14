@@ -13,6 +13,7 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import MinimalChatBox from "@/components/ui/minimal-chat-box"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -432,6 +433,7 @@ const DemoOne = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <MinimalChatBox />
     </div>
   )
 }
