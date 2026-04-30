@@ -38,6 +38,8 @@ export default function HoverPlayCard({
       onMouseEnter={() => { setIsHovering(true); setHovered(true); }}
       onMouseLeave={() => { setIsHovering(false); setHovered(false); }}
     >
+      {/* Preload video in background */}
+      <video src={src} muted playsInline preload="auto" style={{ display: "none" }} />
       <AnimatePresence>
         {isHovering && (
           <motion.div
