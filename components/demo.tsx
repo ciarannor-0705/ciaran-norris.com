@@ -300,23 +300,78 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
 
 
 const blogPosts = [
-  { title: "Coming soon", date: "2025", description: "Stay tuned." },
+  {
+    title: "Just Studying Isn't Enough",
+    date: "Apr 30 2026",
+    description: "Why practical experience matters more than ever — especially now.",
+    content: [
+      "My mum always asks me why I am doing yet another internship? She is afraid I'm doing too much, and I should take the summer off and fly to Bali or whatever.",
+      "But here's the thing. The problem isn't doing too many internships. The problem is finishing three years of university with zero practical experience and then wondering why it's hard to find a job, even with a degree from a good school.",
+      "University is useful for one thing in particular: building a network. Especially at a place like Mannheim, where a lot of your peers are going to end up in the same type of roles you're aiming for. It makes sense to build those relationships early. At some point these people will be making decisions, and it helps if they know you.",
+      "The actual curriculum is a different story. The first two semesters are fine as you get some basics and a rough idea of how a business works in theory. After that it gets very specific, very theoretical, and most of it doesn't translate into how things actually work in practice.",
+      "And now with AI, the stakes are getting higher (Harvard just released a study that 7% of all junior positions have been cut since 2023). So even if you come from a good university, the market is getting tighter. The safe path is less safe than it used to be.",
+      "To stand out, grades help as a baseline, but they're not enough on their own. What actually differentiates you is practical experience and showing that you've stepped outside the comfort zone that university largely is. That doesn't have to mean internships specifically. It could be building your own thing, doing freelance projects, whatever. Something that shows you've actually done something in the real world.",
+      "The other reason to get experience now specifically is AI. If you're doing an internship at a startup today, you have access to these tools in real work situations. The use cases you encounter there are the ones that will actually matter later. Learning how to use Claude Code to automate your university work is not the same as learning how to use it to solve a real problem at work.",
+      "The people who figure this out early are going to have a significant head start. In three years, you'll be competing with people who have spent a year in total using these tools in real environments, watching them develop, and understanding what they can actually do. That gap is going to be hard to close.",
+      "So that's basically it. Get out of the lecture hall as much as you reasonably can, pick up practical experience, and make sure you're learning how to use the tools that are actually reshaping how work gets done. The rest will follow.",
+    ],
+  },
 ]
 
-const BlogContent = () => (
-  <div className="flex flex-col">
-    <h1 className="mb-8 text-left" style={interStyle}>
-      <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-        blog
-      </BlurTextEffect>
-    </h1>
+const BlogContent = () => {
+  const [openPost, setOpenPost] = React.useState<number | null>(null)
+  const post = openPost !== null ? blogPosts[openPost] : null
+
+  return (
     <div className="flex flex-col">
-      {blogPosts.map((post, i) => (
-        <BlogCard key={i} title={post.title} date={post.date} description={post.description} />
-      ))}
+      <h1 className="mb-8 text-left" style={interStyle}>
+        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
+          blog
+        </BlurTextEffect>
+      </h1>
+      <div className="relative flex flex-col">
+        {blogPosts.map((p, i) => (
+          <div key={i} onClick={() => setOpenPost(i)}>
+            <BlogCard title={p.title} date={p.date} description={p.description} />
+          </div>
+        ))}
+
+        <AnimatePresence>
+          {post && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setOpenPost(null)} />
+              <motion.div
+                className="absolute inset-0 bg-white rounded-lg border border-black/10 shadow-lg z-50 px-6 pt-5 pb-4 flex flex-col"
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ type: "spring", bounce: 0.1, duration: 0.35 }}
+              >
+                <button
+                  onClick={() => setOpenPost(null)}
+                  className="absolute top-3 right-4 text-black/30 hover:text-black transition-colors text-sm cursor-pointer"
+                >✕</button>
+                <BlurFade delay={0} duration={0.3}>
+                  <p className="text-xs text-black/40 uppercase mb-1" style={interStyle}>{post.date}</p>
+                  <h2 className="text-2xl font-bold text-black mb-4" style={interStyle}>{post.title}</h2>
+                </BlurFade>
+                <ScrollArea className="flex-1">
+                  <div className="flex flex-col gap-4 pr-4">
+                    {post.content.map((para, i) => (
+                      <BlurFade key={i} delay={i * 0.05} duration={0.3}>
+                        <p className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
+                      </BlurFade>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 const tabStyle = {
   fontFamily: "var(--font-inter), sans-serif",
