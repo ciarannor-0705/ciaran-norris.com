@@ -339,6 +339,14 @@ const DemoOne = () => {
     return () => clearTimeout(t)
   }, [])
 
+  useEffect(() => {
+    const images = ["/minion arme.JPG", "/conference.webp", "/pitchbattle.webp"]
+    images.forEach(src => {
+      const img = new window.Image()
+      img.src = src
+    })
+  }, [])
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <SiteBackground />
