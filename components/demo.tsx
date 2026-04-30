@@ -14,6 +14,7 @@ import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import BlogCard from "@/components/ui/blog-cards"
+import { ProgressiveBlur } from "@/components/ui/progressive-blur"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -366,11 +367,17 @@ const BlogContent = () => {
             style={interStyle}
           >← back</button>
           <p className="text-xs text-black/40 uppercase mb-2" style={interStyle}>{post.date}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-8" style={interStyle}>{post.title}</h2>
-          <div className="flex flex-col gap-4">
-            {post.content.map((para, i) => (
-              <p key={i} className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
-            ))}
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-6" style={interStyle}>{post.title}</h2>
+          <div className="relative h-[58vh] w-full">
+            <ProgressiveBlur position="top" backgroundColor="white" height="72px" />
+            <ProgressiveBlur position="bottom" backgroundColor="white" height="72px" />
+            <div className="h-full overflow-y-auto">
+              <div className="flex flex-col gap-4 py-8">
+                {post.content.map((para, i) => (
+                  <p key={i} className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.div>
       )}
