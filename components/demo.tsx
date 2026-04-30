@@ -310,7 +310,7 @@ const BlogContent = () => (
         blog
       </BlurTextEffect>
     </h1>
-    <div className="flex flex-col -mx-4">
+    <div className="flex flex-col">
       {blogPosts.map((post, i) => (
         <BlogCard key={i} title={post.title} date={post.date} description={post.description} />
       ))}
