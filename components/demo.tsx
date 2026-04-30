@@ -13,6 +13,7 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import BlogCard from "@/components/ui/blog-cards"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -319,6 +320,25 @@ const ContactContent = () => (
   </div>
 )
 
+const blogPosts = [
+  { title: "Coming soon", date: "2025", description: "Stay tuned." },
+]
+
+const BlogContent = () => (
+  <div className="flex flex-col gap-3">
+    <h1 className="mb-8 text-left" style={interStyle}>
+      <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
+        blog
+      </BlurTextEffect>
+    </h1>
+    <div className="flex flex-col">
+      {blogPosts.map((post, i) => (
+        <BlogCard key={i} title={post.title} date={post.date} description={post.description} />
+      ))}
+    </div>
+  </div>
+)
+
 const tabStyle = {
   fontFamily: "var(--font-inter), sans-serif",
   fontWeight: 500,
@@ -407,6 +427,7 @@ const DemoOne = () => {
                   <TabsTab value="story" style={tabStyle}>intro</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
                   <TabsTab value="contact" style={tabStyle}>contact</TabsTab>
+                  <TabsTab value="blog" style={tabStyle}>blog</TabsTab>
                 </TabsList>
               </div>
 
@@ -416,12 +437,13 @@ const DemoOne = () => {
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
                   <TabsPanel value="contact"><ContactContent /></TabsPanel>
+                  <TabsPanel value="blog"><BlogContent /></TabsPanel>
                 </div>
               </div>
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
-              {["story", "experience", "contact"].map((tab) => (
+              {["story", "experience", "contact", "blog"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { if (tab === activeTab && tab === "experience") { setOpenId(null); } else { setActiveTab(tab); setOpenId(null); } }}
