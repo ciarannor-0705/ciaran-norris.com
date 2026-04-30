@@ -145,13 +145,13 @@ const experiences: Experience[] = [
   },
   {
     id: "mercanis",
-    title: "GtM Intern",
+    title: "GTM Intern",
     logo: "/mercanis logo.png",
     fullLogo: "/mercanis full logo.png",
     content: "",
     contentNodes: [
       <>Mercanis is a Series A B2B SaaS company building procurement software for German enterprises, unifying SRM, tenders, and sourcing into one platform.</>,
-      <>I joined as a GtM Intern, owning outbound pipeline from cold calls to qualification. In three months I generated over 700K in demo pipeline while also helping execute inbound channels like events and webinars.</>,
+      <>I joined as a GTM Intern, owning outbound pipeline from cold calls to qualification. In three months I generated over 700K in demo pipeline while also helping execute inbound channels like events and webinars.</>,
       <>This was where I first learned what execution in a fast-growing startup looks like, and where I started using AI tools to enable a sales team.</>,
     ],
   },
