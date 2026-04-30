@@ -323,53 +323,53 @@ const BlogContent = () => {
   const post = openPost !== null ? blogPosts[openPost] : null
 
   return (
-    <div className="flex flex-col">
-      <h1 className="mb-8 text-left" style={interStyle}>
-        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-          blog
-        </BlurTextEffect>
-      </h1>
-      <div className="relative flex flex-col">
-        {blogPosts.map((p, i) => (
-          <div key={i} onClick={() => setOpenPost(i)}>
-            <BlogCard title={p.title} date={p.date} description={p.description} />
+    <AnimatePresence mode="wait">
+      {post === null ? (
+        <motion.div
+          key="list"
+          className="flex flex-col"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <h1 className="mb-8 text-left" style={interStyle}>
+            <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
+              blog
+            </BlurTextEffect>
+          </h1>
+          <div className="flex flex-col">
+            {blogPosts.map((p, i) => (
+              <div key={i} onClick={() => setOpenPost(i)}>
+                <BlogCard title={p.title} date={p.date} description={p.description} />
+              </div>
+            ))}
           </div>
-        ))}
-
-        <AnimatePresence>
-          {post && (
-            <>
-              <div className="fixed inset-0 z-40" onClick={() => setOpenPost(null)} />
-              <motion.div
-                className="absolute inset-0 bg-white rounded-lg border border-black/10 shadow-lg z-50 px-6 pt-5 pb-4 flex flex-col"
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ type: "spring", bounce: 0.1, duration: 0.35 }}
-              >
-                <button
-                  onClick={() => setOpenPost(null)}
-                  className="absolute top-3 right-4 text-black/30 hover:text-black transition-colors text-sm cursor-pointer"
-                >✕</button>
-                <BlurFade delay={0} duration={0.3}>
-                  <p className="text-xs text-black/40 uppercase mb-1" style={interStyle}>{post.date}</p>
-                  <h2 className="text-2xl font-bold text-black mb-4" style={interStyle}>{post.title}</h2>
-                </BlurFade>
-                <ScrollArea className="flex-1">
-                  <div className="flex flex-col gap-4 pr-4">
-                    {post.content.map((para, i) => (
-                      <BlurFade key={i} delay={i * 0.05} duration={0.3}>
-                        <p className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
-                      </BlurFade>
-                    ))}
-                  </div>
-                </ScrollArea>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="post"
+          className="flex flex-col"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
+          <button
+            onClick={() => setOpenPost(null)}
+            className="text-sm text-black/40 hover:text-black transition-colors cursor-pointer mb-8 text-left"
+            style={interStyle}
+          >← back</button>
+          <p className="text-xs text-black/40 uppercase mb-2" style={interStyle}>{post.date}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-8" style={interStyle}>{post.title}</h2>
+          <div className="flex flex-col gap-4">
+            {post.content.map((para, i) => (
+              <p key={i} className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
