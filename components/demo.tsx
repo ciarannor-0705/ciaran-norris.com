@@ -298,40 +298,19 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
   )
 }
 
-const ContactContent = () => (
-  <div className="flex flex-col gap-3">
-    <h1 className="mb-8 text-left" style={interStyle}>
-      <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-        contact
-      </BlurTextEffect>
-    </h1>
-    {["e: ciaran.nor@gmail.com"].map((item, i) => (
-      <motion.p
-        key={i}
-        className="text-base md:text-xl text-black/80 leading-relaxed"
-        style={interStyle}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
-      >
-        {item}
-      </motion.p>
-    ))}
-  </div>
-)
 
 const blogPosts = [
   { title: "Coming soon", date: "2025", description: "Stay tuned." },
 ]
 
 const BlogContent = () => (
-  <div className="flex flex-col gap-3">
+  <div className="flex flex-col">
     <h1 className="mb-8 text-left" style={interStyle}>
       <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
         blog
       </BlurTextEffect>
     </h1>
-    <div className="flex flex-col">
+    <div className="flex flex-col -mx-4">
       {blogPosts.map((post, i) => (
         <BlogCard key={i} title={post.title} date={post.date} description={post.description} />
       ))}
@@ -426,7 +405,6 @@ const DemoOne = () => {
                 <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/55 [&_[data-slot=tabs-tab]]:transition-colors">
                   <TabsTab value="story" style={tabStyle}>intro</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
-                  <TabsTab value="contact" style={tabStyle}>contact</TabsTab>
                   <TabsTab value="blog" style={tabStyle}>blog</TabsTab>
                 </TabsList>
               </div>
@@ -436,14 +414,13 @@ const DemoOne = () => {
                 <div className="w-full max-w-3xl">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
-                  <TabsPanel value="contact"><ContactContent /></TabsPanel>
                   <TabsPanel value="blog"><BlogContent /></TabsPanel>
                 </div>
               </div>
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
-              {["story", "experience", "contact", "blog"].map((tab) => (
+              {["story", "experience", "blog"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { if (tab === activeTab && tab === "experience") { setOpenId(null); } else { setActiveTab(tab); setOpenId(null); } }}
