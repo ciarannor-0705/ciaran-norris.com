@@ -398,7 +398,7 @@ const DemoOne = () => {
             <Tabs
               className="w-full h-full flex-row relative"
               value={activeTab}
-              onValueChange={(val) => { setActiveTab(val); setOpenId(null); }}
+              onValueChange={(val) => { if (val === activeTab && val === "experience") { setOpenId(null); } else { setActiveTab(val); setOpenId(null); } }}
               orientation="vertical"
             >
               {/* Side nav — desktop only */}
@@ -424,7 +424,7 @@ const DemoOne = () => {
               {["story", "experience", "contact"].map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => { setActiveTab(tab); setOpenId(null); }}
+                  onClick={() => { if (tab === activeTab && tab === "experience") { setOpenId(null); } else { setActiveTab(tab); setOpenId(null); } }}
                   className="cursor-pointer transition-colors text-base font-medium"
                   style={{
                     ...tabStyle,
