@@ -14,7 +14,6 @@ import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import BlogCard from "@/components/ui/blog-cards"
-import { ProgressiveBlur } from "@/components/ui/progressive-blur"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -356,23 +355,10 @@ const BlogContent = () => {
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <h1 className="mb-8 text-left" style={interStyle}>
-            <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-              blog
-            </BlurTextEffect>
-          </h1>
-          <button
-            onClick={() => setOpenPost(null)}
-            className="text-sm text-black/40 hover:text-black transition-colors cursor-pointer mb-8 text-left"
-            style={interStyle}
-          >← back</button>
-          <p className="text-xs text-black/40 uppercase mb-2" style={interStyle}>{post.date}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-6" style={interStyle}>{post.title}</h2>
           <div className="relative h-[58vh] w-full">
-            <ProgressiveBlur position="top" backgroundColor="white" height="72px" />
-            <ProgressiveBlur position="bottom" backgroundColor="white" height="72px" />
             <div className="h-full overflow-y-auto">
-              <div className="flex flex-col gap-4 py-8">
+              <div className="flex flex-col gap-4 py-2">
                 {post.content.map((para, i) => (
                   <p key={i} className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
                 ))}
