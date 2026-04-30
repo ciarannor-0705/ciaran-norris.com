@@ -349,12 +349,17 @@ const BlogContent = () => {
       ) : (
         <motion.div
           key="post"
-          className="flex flex-col"
+          className="flex flex-col pt-2 pb-16"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
+          <h1 className="mb-8 text-left" style={interStyle}>
+            <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
+              blog
+            </BlurTextEffect>
+          </h1>
           <button
             onClick={() => setOpenPost(null)}
             className="text-sm text-black/40 hover:text-black transition-colors cursor-pointer mb-8 text-left"
