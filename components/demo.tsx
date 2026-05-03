@@ -172,7 +172,7 @@ const experiences: Experience[] = [
         showArrows={false}
         testimonials={[
           { id: 1, name: "", avatar: "/minion arme.JPG", description: "" },
-          { id: 2, name: "", avatar: "/conference.webp", description: "" },
+          { id: 2, name: "", avatar: "/Mainstage.jpg", description: "" },
           { id: 3, name: "", avatar: "/pitchbattle.webp", description: "" },
         ]}
         className="w-full h-full"
