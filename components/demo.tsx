@@ -13,7 +13,6 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import BlogCard from "@/components/ui/blog-cards"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -299,77 +298,6 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
 }
 
 
-const blogPosts = [
-  {
-    title: "Just Studying Isn't Enough",
-    date: "Apr 30 2026",
-    description: "Why practical experience matters more than ever — especially now.",
-    content: [
-      "My mum always asks me why I am doing yet another internship? She is afraid I'm doing too much, and I should take the summer off and fly to Bali or whatever.",
-      "But here's the thing. The problem isn't doing too many internships. The problem is finishing three years of university with zero practical experience and then wondering why it's hard to find a job, even with a degree from a good school.",
-      "University is useful for one thing in particular: building a network. Especially at a place like Mannheim, where a lot of your peers are going to end up in the same type of roles you're aiming for. It makes sense to build those relationships early. At some point these people will be making decisions, and it helps if they know you.",
-      "The actual curriculum is a different story. The first two semesters are fine as you get some basics and a rough idea of how a business works in theory. After that it gets very specific, very theoretical, and most of it doesn't translate into how things actually work in practice.",
-      "And now with AI, the stakes are getting higher (Harvard just released a study that 7% of all junior positions have been cut since 2023). So even if you come from a good university, the market is getting tighter. The safe path is less safe than it used to be.",
-      "To stand out, grades help as a baseline, but they're not enough on their own. What actually differentiates you is practical experience and showing that you've stepped outside the comfort zone that university largely is. That doesn't have to mean internships specifically. It could be building your own thing, doing freelance projects, whatever. Something that shows you've actually done something in the real world.",
-      "The other reason to get experience now specifically is AI. If you're doing an internship at a startup today, you have access to these tools in real work situations. The use cases you encounter there are the ones that will actually matter later. Learning how to use Claude Code to automate your university work is not the same as learning how to use it to solve a real problem at work.",
-      "The people who figure this out early are going to have a significant head start. In three years, you'll be competing with people who have spent a year in total using these tools in real environments, watching them develop, and understanding what they can actually do. That gap is going to be hard to close.",
-      "So that's basically it. Get out of the lecture hall as much as you reasonably can, pick up practical experience, and make sure you're learning how to use the tools that are actually reshaping how work gets done. The rest will follow.",
-    ],
-  },
-]
-
-const BlogContent = () => {
-  const [openPost, setOpenPost] = React.useState<number | null>(null)
-  const post = openPost !== null ? blogPosts[openPost] : null
-
-  return (
-    <AnimatePresence mode="wait">
-      {post === null ? (
-        <motion.div
-          key="list"
-          className="flex flex-col"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <h1 className="mb-8 text-left" style={interStyle}>
-            <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-              blog
-            </BlurTextEffect>
-          </h1>
-          <div className="flex flex-col">
-            {blogPosts.map((p, i) => (
-              <div key={i} onClick={() => setOpenPost(i)}>
-                <BlogCard title={p.title} date={p.date} description={p.description} />
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          key="post"
-          className="flex flex-col pt-2 pb-16"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-6" style={interStyle}>{post.title}</h2>
-          <div className="relative h-[58vh] w-full">
-            <div className="h-full overflow-y-auto">
-              <div className="flex flex-col gap-4 py-2">
-                {post.content.map((para, i) => (
-                  <p key={i} className="text-base text-black/70 leading-relaxed" style={interStyle}>{para}</p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
-}
 
 const tabStyle = {
   fontFamily: "var(--font-inter), sans-serif",
@@ -458,7 +386,6 @@ const DemoOne = () => {
                 <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/55 [&_[data-slot=tabs-tab]]:transition-colors">
                   <TabsTab value="story" style={tabStyle}>intro</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
-                  <TabsTab value="blog" style={tabStyle}>blog</TabsTab>
                 </TabsList>
               </div>
 
@@ -467,13 +394,12 @@ const DemoOne = () => {
                 <div className="w-full max-w-3xl">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
-                  <TabsPanel value="blog"><BlogContent /></TabsPanel>
                 </div>
               </div>
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
-              {["story", "experience", "blog"].map((tab) => (
+              {["story", "experience"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { if (tab === activeTab && tab === "experience") { setOpenId(null); } else { setActiveTab(tab); setOpenId(null); } }}
