@@ -78,7 +78,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
     <>I grew up near Münster, tryharding in <HoverPlayCard src="/fußball goat.mov" /> and enjoying life as a teenager. One day, during my final year at school, I came across a YouTube video about making money online.</>,
     "So I dug into web design and ended up closing several craft businesses and scaling my agency to a solid amount of money for a 17 year old.",
     <>After a boring 9 to 5 in my gap year, I went to Mannheim to study business and really got into startups through <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />. I interned at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} /> will be my next station.</>,
-    "These times are super exciting, and the opportunity cost of being stuck in uni instead of building at the hottest startups scares me. So lets get out there and build. LFG!",
+    "Reach out if you are in Berlin. Let's grab a coffee.",
   ]
 
   return (
@@ -163,7 +163,7 @@ const experiences: Experience[] = [
     content: "",
     contentNodes: [
       <>Q-Summit is Germany&apos;s largest student-run startup conference with over 1500 participants at the University of Mannheim, connecting top talent with leading startups and VCs.</>,
-      <>I took over as Head of Startup and Venture Capital, leading a 15-member division. I upsold existing partners and cold acquired new ones like Lovable, Trade Republic, OpenAI, and Anthropic. Over 90K in funding acquired, full sales funnel owned from outreach to close.</>,
+      <>I took over as Head of Startup and Venture Capital, leading a 15-member division. I upsold existing partners and cold acquired new ones like Lovable, Trade Republic, OpenAI, and Anthropic. Over 45K in funding acquired, full sales funnel owned from outreach to close.</>,
       <>My year organised our largest conference ever with a record number of partners. ROI of my free time was insane, literally would never be in the place where I am right now without the network, experience and vision. Thanks to the whole team!</>,
     ],
     sidebar: (
