@@ -55,7 +55,7 @@ function GradualSpacing({
                 aria-hidden
                 className="absolute inset-0"
                 style={{
-                  WebkitTextStroke: "1.5px black",
+                  WebkitTextStroke: "1.5px rgba(0,0,0,0.75)",
                   WebkitTextFillColor: "transparent",
                 }}
                 initial={{ opacity: 1 }}
@@ -69,7 +69,7 @@ function GradualSpacing({
               <motion.span
                 aria-hidden
                 className="absolute inset-0"
-                style={{ WebkitTextFillColor: "black" }}
+                style={{ WebkitTextFillColor: "rgba(0,0,0,0.75)" }}
                 initial={{ clipPath: "inset(100% 0 0 0)" }}
                 animate={{ clipPath: "inset(0% 0 0 0)" }}
                 transition={{ duration: FILL_DURATION, delay: fillDelay, ease: "easeInOut" }}
