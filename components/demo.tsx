@@ -344,14 +344,14 @@ const DemoOne = () => {
                 text="Ciaran"
                 duration={0.8}
                 delayMultiple={0.06}
-                className="text-6xl font-bold leading-none text-black block"
+                className="text-6xl font-bold leading-none text-black/75 block"
                 style={{ fontFamily: "var(--font-inter), sans-serif" }}
               />
               <GradualSpacing
                 text="Norris"
                 duration={0.8}
                 delayMultiple={0.06}
-                className="text-6xl font-bold leading-none text-black block"
+                className="text-6xl font-bold leading-none text-black/75 block"
                 style={{ fontFamily: "var(--font-inter), sans-serif" }}
               />
             </div>
@@ -360,7 +360,7 @@ const DemoOne = () => {
                 text="Ciaran Norris"
                 duration={0.8}
                 delayMultiple={0.06}
-                className="text-9xl font-bold leading-none text-black"
+                className="text-9xl font-bold leading-none text-black/75"
                 style={{ fontFamily: "var(--font-inter), sans-serif" }}
               />
             </div>
