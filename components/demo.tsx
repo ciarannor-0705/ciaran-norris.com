@@ -8,7 +8,6 @@ import { BlurTextEffect } from "@/components/ui/blur-text-effect"
 import HoverPlayCard from "@/components/ui/hover-play-card"
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@/components/ui/tabs"
 import { ChevronRight } from "lucide-react"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { BlurFade } from "@/components/ui/blur-fade"
 import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
@@ -259,21 +258,19 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={activeExp.fullLogo} alt={activeExp.title} className="h-8 w-auto object-contain mb-4 mt-1 self-start" />
                 </BlurFade>
-                <ScrollArea className="flex-1">
-                  <div className="flex flex-col gap-3 pr-4 min-h-full justify-center">
-                    {(activeExp.contentNodes
-                      ? activeExp.contentNodes
-                      : activeExp.content.split("\n\n")
-                    ).map((para, i) => (
-                      <BlurFade key={i} delay={i * 0.08} duration={0.35}>
-                        {typeof para === "string"
-                          ? <p className="text-base text-black/70 leading-relaxed text-left" style={interStyle}>{para}</p>
-                          : <div className="text-base text-black/70" style={interStyle}>{para}</div>
-                        }
-                      </BlurFade>
-                    ))}
-                  </div>
-                </ScrollArea>
+                <div className="flex-1 flex flex-col justify-center gap-3 overflow-y-auto">
+                  {(activeExp.contentNodes
+                    ? activeExp.contentNodes
+                    : activeExp.content.split("\n\n")
+                  ).map((para, i) => (
+                    <BlurFade key={i} delay={i * 0.08} duration={0.35}>
+                      {typeof para === "string"
+                        ? <p className="text-base text-black/70 leading-relaxed text-left" style={interStyle}>{para}</p>
+                        : <div className="text-base text-black/70" style={interStyle}>{para}</div>
+                      }
+                    </BlurFade>
+                  ))}
+                </div>
               </motion.div>
               {/* Sidebar cards — float to the right of the popup */}
               {activeExp.sidebar && (
