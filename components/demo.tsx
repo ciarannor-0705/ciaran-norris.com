@@ -85,7 +85,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   return (
     <div className="flex flex-col gap-3">
       <h1 className="mb-8 text-left" style={headingStyle}>
-        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
+        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/85">
           Hi, I'm Ciaran.
         </BlurTextEffect>
       </h1>
