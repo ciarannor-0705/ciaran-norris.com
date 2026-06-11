@@ -57,6 +57,7 @@ const AlexHoverName = () => <PersonHoverName name="Alex" photo="/alex foto.jpeg"
 const PhilipHoverName = () => <PersonHoverName name="Philip" photo="/philip foto.jpeg" fallback="P" linkedin="https://www.linkedin.com/in/philipnag/" />
 
 const interStyle = { fontFamily: "var(--font-inter), sans-serif" }
+const headingStyle = { fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }
 
 const CompanyLink = ({ name, id, onOpen }: { name: string; id: string; onOpen: (id: string) => void }) => {
   const [hovered, setHovered] = React.useState(false)
@@ -83,7 +84,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
 
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="mb-8 text-left" style={interStyle}>
+      <h1 className="mb-8 text-left" style={headingStyle}>
         <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
           quick intro
         </BlurTextEffect>
@@ -193,7 +194,7 @@ const experiences: Experience[] = [
 ]
 
 const ExperienceTitle = React.memo(() => (
-  <h1 className="mb-8 text-left" style={interStyle}>
+  <h1 className="mb-8 text-left" style={headingStyle}>
     <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
       experience
     </BlurTextEffect>
