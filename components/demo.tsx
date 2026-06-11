@@ -86,7 +86,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
     <div className="flex flex-col gap-3">
       <h1 className="mb-8 text-left" style={headingStyle}>
         <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black">
-          quick intro
+          Hi, I'm Ciaran.
         </BlurTextEffect>
       </h1>
       <div className="flex flex-col gap-3">
@@ -385,7 +385,7 @@ const DemoOne = () => {
               {/* Side nav — desktop only */}
               <div className="hidden md:flex absolute left-0 top-0 bottom-0 items-center px-8 py-16 z-50">
                 <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/55 [&_[data-slot=tabs-tab]]:transition-colors">
-                  <TabsTab value="story" style={tabStyle}>intro</TabsTab>
+                  <TabsTab value="story" style={tabStyle}>about</TabsTab>
                   <TabsTab value="experience" style={tabStyle}>experience</TabsTab>
                 </TabsList>
               </div>
@@ -412,7 +412,7 @@ const DemoOne = () => {
                     paddingBottom: 2,
                   }}
                 >
-                  {tab === "story" ? "intro" : tab}
+                  {tab === "story" ? "about" : tab}
                 </button>
               ))}
             </div>
