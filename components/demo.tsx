@@ -187,8 +187,8 @@ const experiences: Experience[] = [
     content: "",
     contentNodes: [
       <>At 17 I started my own agency, selling websites to local trades and craftsmen. SEO and paid ads were tailored to help them attract new employees and customers through their online presence.</>,
-      <>I scraped leads from Google Maps, cold called them, and eventually closed my first client, which led to referrals and more. Afternoons after school were spent acquiring, weekends were spent building. Occasionally hungover, as you&apos;d expect at 18.</>,
-      <>It taught me a lot about sales and customer success. But eventually I realised that websites for tradesmen isn&apos;t a great niche to build something scalable in.</>,
+      <>I scraped leads from Google Maps, cold called them, and eventually closed my first client, which led to referrals and more.</>,
+      <>Taught me a lot about sales and had fun.</>,
     ],
   },
 ]
