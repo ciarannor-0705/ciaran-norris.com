@@ -76,7 +76,7 @@ const CiaranHoverName = () => {
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <Avatar className="h-7 w-7 rounded-full ring-1 ring-black/10 shadow-sm">
+            <Avatar className="h-9 w-9 rounded-full ring-1 ring-black/10 shadow-sm">
               <AvatarImage src="/profil.png" alt="Ciaran" />
               <AvatarFallback>C</AvatarFallback>
             </Avatar>
@@ -85,7 +85,7 @@ const CiaranHoverName = () => {
       </AnimatePresence>
       <span
         className="text-3xl md:text-5xl font-bold underline decoration-black/20 underline-offset-2 transition-colors"
-        style={{ color: hovered ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.75)", fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}
+        style={{ color: hovered ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.75)", fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}
       >Ciaran.</span>
     </a>
   )
