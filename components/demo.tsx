@@ -56,6 +56,41 @@ const FabianHoverName = () => <PersonHoverName name="Fabian" photo="/fabian foto
 const AlexHoverName = () => <PersonHoverName name="Alex" photo="/alex foto.jpeg" fallback="A" linkedin="https://www.linkedin.com/in/alexkrass/" />
 const PhilipHoverName = () => <PersonHoverName name="Philip" photo="/philip foto.jpeg" fallback="P" linkedin="https://www.linkedin.com/in/philipnag/" />
 
+const CiaranHoverName = () => {
+  const [hovered, setHovered] = React.useState(false)
+  return (
+    <a
+      href="https://www.linkedin.com/in/ciaran-norris/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative inline-block cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-0.5 z-50"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <Avatar className="h-7 w-7 rounded-full ring-1 ring-black/10 shadow-sm">
+              <AvatarImage src="/profil.png" alt="Ciaran" />
+              <AvatarFallback>C</AvatarFallback>
+            </Avatar>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <span
+        className="text-3xl md:text-5xl font-bold underline decoration-black/20 underline-offset-2 transition-colors"
+        style={{ color: hovered ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.75)", fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}
+      >Ciaran.</span>
+    </a>
+  )
+}
+
 const interStyle = { fontFamily: "var(--font-inter), sans-serif" }
 const headingStyle = { fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }
 
@@ -85,9 +120,8 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   return (
     <div className="flex flex-col gap-3">
       <h1 className="mb-8 text-left" style={headingStyle}>
-        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">
-          Hi, I'm Ciaran.
-        </BlurTextEffect>
+        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"Hi, I'm "}</BlurTextEffect>
+        <CiaranHoverName />
       </h1>
       <div className="flex flex-col gap-3">
         {storyLines.map((line, i) => (
