@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 
 async function getAccessToken(): Promise<string> {
+  const params = new URLSearchParams({
+    client_id: process.env.STRAVA_CLIENT_ID ?? "",
+    client_secret: process.env.STRAVA_CLIENT_SECRET ?? "",
+    refresh_token: process.env.STRAVA_REFRESH_TOKEN ?? "",
+    grant_type: "refresh_token",
+  });
   const res = await fetch("https://www.strava.com/oauth/token", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      client_id: process.env.STRAVA_CLIENT_ID,
-      client_secret: process.env.STRAVA_CLIENT_SECRET,
-      refresh_token: process.env.STRAVA_REFRESH_TOKEN,
-      grant_type: "refresh_token",
-    }),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString(),
     cache: "no-store",
   });
   if (!res.ok) {
