@@ -12,7 +12,10 @@ async function getAccessToken(): Promise<string> {
     }),
     cache: "no-store",
   });
-  if (!res.ok) throw new Error("Failed to refresh Strava token");
+  if (!res.ok) {
+    const errBody = await res.text();
+    throw new Error(`Strava token refresh failed: ${res.status} – ${errBody}`);
+  }
   const data = await res.json();
   return data.access_token;
 }
