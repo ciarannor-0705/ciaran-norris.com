@@ -17,6 +17,7 @@ import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { DestinationCard } from "@/components/ui/card-21"
 import { StravaPopup } from "@/components/ui/strava-popup"
+import { LinkCard } from "@/components/ui/card-26"
 
 
 const PersonHoverName = ({ name, photo, fallback, linkedin }: { name: string; photo: string; fallback: string; linkedin: string }) => {
@@ -527,36 +528,56 @@ const StuffContent = ({ stravaOpen, setStravaOpen }: { stravaOpen: boolean; setS
       </h1>
 
       <div className="relative grid grid-cols-3 gap-3 w-full">
-        {[
-          { img: "/first foto.png", label: "strava-maxxing", delay: 0.05, onClick: () => setStravaOpen(true) },
-          { img: "/second foto.png", label: "tech stack", delay: 0.10, onClick: undefined },
-          { img: "/third foto.png", label: "music-maxxing", delay: 0.15, onClick: undefined },
-        ].map((card, i) => (
-          <motion.div
-            key={i}
-            className="relative w-full aspect-square rounded-2xl overflow-hidden bg-white cursor-pointer"
-            style={{ boxShadow: "0 -6px 20px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)" }}
-            initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            whileHover={{ scale: 1.02, transition: { duration: 0.25, ease: "easeOut" } }}
-            transition={{ duration: 0.35, ease: "easeOut", delay: card.delay }}
-            onClick={card.onClick}
-          >
-            {card.label && (
-              <span
-                className="absolute bottom-7 left-0 right-0 text-center text-lg font-bold text-black/75"
-                style={{ fontFamily: "var(--font-inter), sans-serif" }}
-              >
-                {card.label}
-              </span>
-            )}
-            <img
-              src={card.img}
-              alt={card.label}
-              className="absolute inset-0 m-auto w-[75%] h-[75%] object-contain" style={{ marginBottom: "3rem" }}
-            />
-          </motion.div>
-        ))}
+        <motion.div
+          initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
+        >
+          <LinkCard
+            title="strava-maxxing"
+            description="tracking every km. click to see my latest runs."
+            imageUrl="/first foto.png"
+            href="#"
+            target="_self"
+            rel=""
+            onClick={(e) => { e.preventDefault(); setStravaOpen(true); }}
+            className="cursor-pointer"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.35, ease: "easeOut", delay: 0.10 }}
+        >
+          <LinkCard
+            title="tech stack"
+            description="claude code, n8n, vercel, cursor, and too many tabs."
+            imageUrl="/second foto.png"
+            href="#"
+            target="_self"
+            rel=""
+            onClick={(e) => e.preventDefault()}
+            className="cursor-default"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.35, ease: "easeOut", delay: 0.15 }}
+        >
+          <LinkCard
+            title="music-maxxing"
+            description="always has something playing. mostly techno and house."
+            imageUrl="/third foto.png"
+            href="#"
+            target="_self"
+            rel=""
+            onClick={(e) => e.preventDefault()}
+            className="cursor-default"
+          />
+        </motion.div>
 
         <AnimatePresence>
           {stravaOpen && (
