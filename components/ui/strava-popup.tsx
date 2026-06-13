@@ -46,15 +46,9 @@ export function StravaPopup({ data, onClose }: StravaPopupProps) {
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  const month = data?.months[monthIndex];
-
-  const chartData = month?.runs
-    .slice()
-    .reverse()
-    .map((r) => ({
-      name: new Date(r.date).toLocaleDateString("en", { day: "numeric", month: "short" }),
-      km: r.distance_km,
-    })) ?? [];
+  // Guard against error responses from API
+  const safeData = data && Array.isArray((data as { months?: unknown }).months) ? data : null;
+  const month = safeData?.months[monthIndex];
 
   return (
     <>
@@ -88,7 +82,7 @@ export function StravaPopup({ data, onClose }: StravaPopupProps) {
           <div className="flex items-center justify-between px-4 pb-3">
             <button
               onClick={() => setMonthIndex(i => Math.min(i + 1, (data?.months.length ?? 1) - 1))}
-              disabled={monthIndex >= (data?.months.length ?? 1) - 1}
+              disabled={monthIndex >= (safeData?.months.length ?? 1) - 1}
               className="p-1 hover:text-black/60 transition-colors disabled:opacity-25 text-black/35"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -108,9 +102,9 @@ export function StravaPopup({ data, onClose }: StravaPopupProps) {
           {/* Month stats */}
           <div className="grid grid-cols-3 gap-2 px-4 mb-4">
             {[
-              { value: `${month?.distance_km ?? "—"}`, unit: "km" },
+              { value: month?.distance_km != null ? `${month.distance_km}` : "—", unit: "km" },
               { value: month?.duration ?? "—", unit: "time" },
-              { value: `${month?.runs.length ?? "—"}`, unit: "runs" },
+              { value: month?.runs?.length != null ? `${month.runs.length}` : "—", unit: "runs" },
             ].map(({ value, unit }) => (
               <div key={unit} className="rounded-xl bg-black/4 px-3 py-2.5 text-center">
                 <div className="text-base font-bold text-black/75 leading-none mb-0.5" style={sfStyle}>{value}</div>
@@ -123,7 +117,7 @@ export function StravaPopup({ data, onClose }: StravaPopupProps) {
           <div className="px-4 pb-4">
             <div className="text-[10px] text-black/35 uppercase tracking-wide mb-2" style={sfStyle}>runs</div>
             <div className="space-y-1.5">
-              {(month?.runs ?? []).map((run) => (
+              {(month?.runs ?? []).filter(Boolean).map((run) => (
                 <a
                   key={run.id}
                   href={run.strava_url}
