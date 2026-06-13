@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 async function getAccessToken(): Promise<string> {
+  console.log("STRAVA_CLIENT_ID present:", !!process.env.STRAVA_CLIENT_ID, "value:", process.env.STRAVA_CLIENT_ID?.slice(0, 4));
   const params = new URLSearchParams({
     client_id: process.env.STRAVA_CLIENT_ID ?? "",
     client_secret: process.env.STRAVA_CLIENT_SECRET ?? "",
@@ -15,7 +16,7 @@ async function getAccessToken(): Promise<string> {
   });
   if (!res.ok) {
     const errBody = await res.text();
-    throw new Error(`Strava token refresh failed: ${res.status} – ${errBody}`);
+    throw new Error(`Strava token refresh failed: ${res.status} – ${errBody} | env: id=${process.env.STRAVA_CLIENT_ID?.slice(0,6)} secret=${process.env.STRAVA_CLIENT_SECRET?.slice(0,6)} token=${process.env.STRAVA_REFRESH_TOKEN?.slice(0,6)}`);
   }
   const data = await res.json();
   return data.access_token;
