@@ -16,24 +16,30 @@ export const BlurTextEffect: React.FC<BlurTextEffectProps> = ({ children, classN
 
     const chars = containerRef.current.querySelectorAll('span.char');
 
-    gsap.set(chars, { opacity: 0, y: 6, filter: 'blur(4px)' });
+    gsap.set(chars, { opacity: 0, y: 6 });
 
     gsap.to(chars, {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
       duration: 0.3,
       ease: 'power2.out',
       stagger: 0.02,
-      clearProps: 'filter',
     });
   }, [children]);
 
   return (
-    <span className={`inline-block ${className}`} ref={containerRef}>
+    <span
+      className={`inline-block ${className}`}
+      ref={containerRef}
+      style={{
+        fontVariantLigatures: 'none',
+        fontFeatureSettings: '"liga" 0, "calt" 0, "dlig" 0',
+        letterSpacing: '0.001em',
+      }}
+    >
       {children.split('').map((char, i) => (
-        <span key={`${char}-${i}`} className="char inline-block" style={{ whiteSpace: 'pre' }}>
-          {char === ' ' ? '\u00A0' : char}
+        <span key={i} className="char inline-block" style={{ whiteSpace: 'pre' }}>
+          {char === ' ' ? ' ' : char}
         </span>
       ))}
     </span>

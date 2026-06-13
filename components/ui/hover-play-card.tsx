@@ -38,17 +38,17 @@ export default function HoverPlayCard({
       onMouseEnter={() => { setIsHovering(true); setHovered(true); }}
       onMouseLeave={() => { setIsHovering(false); setHovered(false); }}
     >
-      {/* Preload video in background */}
       <video src={src} muted playsInline preload="auto" style={{ display: "none" }} />
+
       <AnimatePresence>
         {isHovering && (
           <motion.div
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 rounded-xl overflow-hidden shadow-lg"
+            className="absolute z-50 rounded-xl overflow-hidden shadow-lg"
+            style={{ width: 200, left: 80, bottom: "calc(100% + 8px)" }}
             initial={{ opacity: 0, y: 6, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            style={{ width: 200 }}
           >
             <video
               ref={videoRef}
@@ -62,9 +62,10 @@ export default function HoverPlayCard({
           </motion.div>
         )}
       </AnimatePresence>
+
       <span
-        className="cursor-pointer underline decoration-black/30 underline-offset-2 transition-all"
-        style={{ opacity: hovered ? 0.7 : 1 }}
+        className="cursor-pointer transition-all"
+        style={{ color: hovered ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.88)", fontStyle: "italic" }}
       >football</span>
     </span>
   );
