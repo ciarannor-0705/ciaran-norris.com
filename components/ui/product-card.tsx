@@ -15,6 +15,8 @@ interface ProductHighlightCardProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const ProductHighlightCard = React.forwardRef<HTMLDivElement, ProductHighlightCardProps>(
   ({ className, categoryIcon, category, title, description, imageSrc, imageAlt, ...props }, ref) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const motionProps = props as any;
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -44,7 +46,7 @@ export const ProductHighlightCard = React.forwardRef<HTMLDivElement, ProductHigh
           "relative h-[350px] w-[350px] rounded-2xl bg-card shadow-lg transition-shadow duration-300 hover:shadow-2xl",
           className
         )}
-        {...props}
+        {...motionProps}
       >
         <div
           style={{ transform: "translateZ(20px)", transformStyle: "preserve-3d" }}
