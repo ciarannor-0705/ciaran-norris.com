@@ -107,7 +107,7 @@ const CiaranHoverName = () => {
         className="text-3xl md:text-5xl font-bold inline-block"
         style={{ color: hovered ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.75)", fontFamily: "var(--font-inter), sans-serif", letterSpacing: "-0.03em" }}
       >
-        {"Ciaran.".split('').map((char, i) => (
+        {"ciaran.".split('').map((char, i) => (
           <span key={i} className="char inline-block" style={{ whiteSpace: 'pre' }}>
             {char}
           </span>
@@ -147,7 +147,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   return (
     <div className="flex flex-col gap-3 h-full md:h-auto min-h-0">
       <h1 className="mb-4 text-left shrink-0" style={headingStyle}>
-        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"Hi, I'm "}</BlurTextEffect>
+        <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"hi, i'm "}</BlurTextEffect>
         <CiaranHoverName />
       </h1>
       <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible pb-16 md:pb-0">
