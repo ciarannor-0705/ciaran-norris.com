@@ -138,9 +138,7 @@ const CompanyLink = ({ name, id, onOpen }: { name: string; id: string; onOpen: (
 const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => void }) => {
   const storyLines: (string | React.ReactNode)[] = [
     "I had my first touchpoint with entrepreneurship during high school, when I came across videos on how to make money online by developing a cool skill.",
-    "At 17, I started my own agency selling websites to local trades and craftsmen, with SEO and paid ads tailored to help them attract new employees and customers online.",
-    "I scraped businesses in my area from Google Maps, cold-called them, and eventually closed my first client. I spent a lot of time making that client happy, continuously improving their website and SEO, which led to referrals and made it significantly easier to close new clients.",
-    "It taught me a lot about sales and how to deliver a project, and I had a lot of fun doing it.",
+    "I always liked being creative, so I dug into web design, cold-called local craft businesses, and closed my first clients. It was a pretty exciting experience, but also showed me that I needed more experienced entrepreneurs around me to build something real.",
     "My first intuition was to do a gap year at a German hidden champion, but inputting receipts into SAP turned out didn't really help me found a company. I quit and moved to Mannheim to study business.",
     <>Thankfully, I joined <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />, which really sparked my interest in startups. Besides hosting a large startup conference, I also did internships in commercial functions at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} />.</>,
     "These last two years of my studies have really sharpened my vision to found my own company in the next 12-16 months, and given me way more ideas than I can build.",
@@ -620,7 +618,7 @@ const DemoOne = () => {
   }
 
   useEffect(() => {
-    const images = ["/minion arme.JPG", "/conference.webp", "/pitchbattle.webp"]
+    const images = ["/minion arme.JPG", "/Mainstage.jpg", "/pitchbattle.webp"]
     images.forEach(src => {
       const img = new window.Image()
       img.src = src

@@ -45,7 +45,7 @@ const TestimonialCarousel = React.forwardRef<HTMLDivElement, TestimonialCarousel
             return (
               <motion.div
                 key={testimonial.id}
-                className="absolute w-full h-full rounded-xl cursor-grab active:cursor-grabbing overflow-hidden"
+                className="absolute w-full h-full rounded-xl cursor-default overflow-hidden"
                 style={{ zIndex: isCurrentCard ? 3 : isPrevCard ? 2 : 1, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", willChange: "transform" }}
                 drag={isCurrentCard ? "x" : false}
                 dragConstraints={{ left: 0, right: 0 }}

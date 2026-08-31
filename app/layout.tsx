@@ -69,9 +69,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/minion arme.JPG" as="image" />
-        <link rel="preload" href="/conference.webp" as="image" />
+        <link rel="preload" href="/Mainstage.jpg" as="image" />
         <link rel="preload" href="/pitchbattle.webp" as="image" />
-        <link rel="preload" href="/fußball goat.mov" as="video" type="video/mp4" />
       </head>
       <body className={`${inter.variable} ${libreBaskerville.variable} ${montserrat.variable} ${playfairDisplay.variable} ${poppins.variable} ${GeistMono.variable} ${ptSerif.variable} ${dmSans.variable} ${sourceSerif4.variable} antialiased bg-white`}>
         {children}
