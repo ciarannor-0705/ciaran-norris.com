@@ -150,7 +150,7 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
         <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"Hi, I'm "}</BlurTextEffect>
         <CiaranHoverName />
       </h1>
-      <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible pb-12 md:pb-0">
+      <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible pb-32 md:pb-0">
         {storyLines.map((line, i) => (
           <motion.p
             key={i}
