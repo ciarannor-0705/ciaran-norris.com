@@ -275,7 +275,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
   return (
     <div className="flex flex-col gap-3 pb-24 md:pb-0">
       <ExperienceTitle />
-      <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `${experiences.length * 72}px` }}>
+      <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `max(${experiences.length * 72}px, min(60dvh, 560px))` }}>
         {experiences.map((exp, i) => (
           <motion.div key={exp.id} className="flex items-center justify-between w-full border border-black/10 hover:border-black/30 rounded-lg px-4 py-4 cursor-pointer transition-colors" onClick={() => setOpenId(exp.id)}
             initial={{ opacity: 0, y: 8 }}
@@ -661,22 +661,25 @@ const DemoOne = () => {
               </div>
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
-              {["story", "experience"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => { handleTabChange(tab); if (tab === "stuff") setStravaOpen(false); if (tab === "experience") setOpenId(null); }}
-                  className="cursor-pointer transition-colors text-base font-medium"
-                  style={{
-                    ...tabStyle,
-                    color: activeTab === tab ? "black" : "rgba(0,0,0,0.4)",
-                    borderBottom: activeTab === tab ? "1.5px solid black" : "none",
-                    paddingBottom: 2,
-                  }}
-                >
-                  {tab === "story" ? "about" : tab}
-                </button>
-              ))}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
+              <div className="h-10 bg-gradient-to-t from-white to-transparent" />
+              <div className="flex justify-center gap-8 bg-white pb-6 pt-1">
+                {["story", "experience"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => { handleTabChange(tab); if (tab === "stuff") setStravaOpen(false); if (tab === "experience") setOpenId(null); }}
+                    className="cursor-pointer transition-colors text-base font-medium"
+                    style={{
+                      ...tabStyle,
+                      color: activeTab === tab ? "black" : "rgba(0,0,0,0.4)",
+                      borderBottom: activeTab === tab ? "1.5px solid black" : "none",
+                      paddingBottom: 2,
+                    }}
+                  >
+                    {tab === "story" ? "about" : tab}
+                  </button>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
