@@ -64,8 +64,8 @@ export default function HoverPlayCard({
       </AnimatePresence>
 
       <span
-        className="cursor-pointer transition-all"
-        style={{ color: hovered ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.88)", fontStyle: "italic" }}
+        className="cursor-pointer transition-all underline decoration-black/20 decoration-[0.5px] underline-offset-2"
+        style={{ color: hovered ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.88)" }}
       >football</span>
     </span>
   );

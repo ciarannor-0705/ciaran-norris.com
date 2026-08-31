@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import gsap from "gsap"
 import { SiteBackground } from "@/components/ui/site-background"
-import { GradualSpacing } from "@/components/ui/gradual-spacing"
 import { BlurTextEffect } from "@/components/ui/blur-text-effect"
-import HoverPlayCard from "@/components/ui/hover-play-card"
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@/components/ui/tabs"
 import { ChevronRight, Headphones } from "lucide-react"
 import { ProductHighlightCard } from "@/components/ui/product-card"
@@ -129,8 +127,8 @@ const CompanyLink = ({ name, id, onOpen }: { name: string; id: string; onOpen: (
       onClick={() => onOpen(id)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="cursor-pointer transition-all"
-      style={{ color: hovered ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.88)", fontStyle: "italic" }}
+      className="cursor-pointer transition-all underline decoration-black/20 underline-offset-2"
+      style={{ color: hovered ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0.88)" }}
     >
       {name}
     </span>
@@ -139,10 +137,13 @@ const CompanyLink = ({ name, id, onOpen }: { name: string; id: string; onOpen: (
 
 const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => void }) => {
   const storyLines: (string | React.ReactNode)[] = [
-    <>I grew up near Münster, tryharding in <HoverPlayCard src="/fußball goat.mov" /> and enjoying life as a teenager. One day, during my final year at school, I came across a YouTube video about making money online.</>,
-    "So I dug into web design and ended up closing several craft businesses and scaling my agency to a solid amount of money for a 17 year old.",
-    <>After a boring 9 to 5 in my gap year, I went to Mannheim to study business and really got into startups through <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />. I interned at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} /> will be my next station.</>,
-    "Reach out if you are in Berlin. Let's grab a coffee.",
+    "I had my first touchpoint with entrepreneurship during high school, when I came across videos on how to make money online by developing a cool skill.",
+    "At 17, I started my own agency selling websites to local trades and craftsmen, with SEO and paid ads tailored to help them attract new employees and customers online.",
+    "I scraped businesses in my area from Google Maps, cold-called them, and eventually closed my first client. I spent a lot of time making that client happy, continuously improving their website and SEO, which led to referrals and made it significantly easier to close new clients.",
+    "It taught me a lot about sales and how to deliver a project, and I had a lot of fun doing it.",
+    "My first intuition was to do a gap year at a German hidden champion, but inputting receipts into SAP turned out didn't really help me found a company. I quit and moved to Mannheim to study business.",
+    <>Thankfully, I joined <CompanyLink name="Q-Summit" id="qsummit" onOpen={onOpenExperience} />, which really sparked my interest in startups. Besides hosting a large startup conference, I also did internships in commercial functions at <CompanyLink name="Mercanis" id="mercanis" onOpen={onOpenExperience} />, <CompanyLink name="inca" id="inca" onOpen={onOpenExperience} />, and <CompanyLink name="Zauber" id="zauber" onOpen={onOpenExperience} />.</>,
+    "These last two years of my studies have really sharpened my vision to found my own company in the next 12-16 months, and given me way more ideas than I can build.",
   ]
 
   return (
@@ -155,8 +156,8 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
         {storyLines.map((line, i) => (
           <motion.p
             key={i}
-            className="text-base md:text-xl text-black/80 leading-relaxed"
-            style={interStyle}
+            className="text-base text-black/80 leading-relaxed"
+            style={{ ...interStyle, fontWeight: 500 }}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
@@ -191,7 +192,7 @@ const experiences: Experience[] = [
     contentNodes: [
       <>Zauber is building AI agents for sea and air freight forwarders. The industry still runs on complex SOPs, Outlook threads, and thousands of operators doing repetitive work. AI is finally ready to automate that.</>,
       <>The company was founded in 2024 by Erik, co-founder of Forto, a German logistics unicorn that raised over 500M in capital, and is backed by Point Nine.</>,
-      <>I&apos;m joining as a Founder&apos;s Associate Intern, working directly with <ErikHoverName />, <FabianHoverName />, and <AlexHoverName />. The company is very early, so my role is to help figure out how Zauber goes to market, build the processes that don&apos;t exist yet, and get the product into the hands of the right customers.</>,
+      <>I joined as a Founder&apos;s Associate Intern, working directly with <ErikHoverName />, <FabianHoverName />, and <AlexHoverName />. I owned marketing, from LinkedIn content to lead generation and sales automations. I also organized events like AI dinners and poker nights, and jumped on anything else that was on fire.</>,
     ],
   },
   {
@@ -598,7 +599,7 @@ const tabStyle = {
 }
 
 const DemoOne = () => {
-  const [phase, setPhase] = useState<"hero" | "story">("hero")
+  const phase = "story" as const
   const [activeTab, setActiveTab] = useState("story")
   const [openId, setOpenId] = useState<string | null>(null)
   const [stravaOpen, setStravaOpen] = useState(false)
@@ -619,11 +620,6 @@ const DemoOne = () => {
   }
 
   useEffect(() => {
-    const t = setTimeout(() => setPhase("story"), 2200)
-    return () => clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
     const images = ["/minion arme.JPG", "/conference.webp", "/pitchbattle.webp"]
     images.forEach(src => {
       const img = new window.Image()
@@ -634,42 +630,6 @@ const DemoOne = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <SiteBackground />
-
-      <AnimatePresence>
-        {phase === "hero" && (
-          <motion.div
-            key="hero"
-            className="absolute inset-0 z-10 flex items-center justify-center"
-            exit={{ y: -80, opacity: 0, transition: { duration: 0.7, ease: "easeInOut" } }}
-          >
-            <div className="md:hidden flex flex-col items-center">
-              <GradualSpacing
-                text="Ciaran"
-                duration={0.8}
-                delayMultiple={0.06}
-                className="text-6xl font-bold leading-none text-black/75 block"
-                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}
-              />
-              <GradualSpacing
-                text="Norris"
-                duration={0.8}
-                delayMultiple={0.06}
-                className="text-6xl font-bold leading-none text-black/75 block"
-                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}
-              />
-            </div>
-            <div className="hidden md:block">
-              <GradualSpacing
-                text="Ciaran Norris"
-                duration={0.8}
-                delayMultiple={0.06}
-                className="text-9xl font-bold leading-none text-black/75"
-                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {phase === "story" && (
@@ -690,7 +650,6 @@ const DemoOne = () => {
                 <TabsList variant="underline" className="gap-6 [&_[data-slot=tabs-tab]]:text-black/80 [&_[data-slot=tabs-tab]]:!text-base [&_[data-slot=tabs-tab]]:hover:bg-transparent [&_[data-slot=tabs-tab]]:hover:text-black/65 [&_[data-slot=tabs-tab]]:transition-colors [&_[data-slot=tab-indicator]]:bg-black/75">
                   <TabsTab value="story" style={tabStyle}>about</TabsTab>
                   <TabsTab value="experience" style={tabStyle} onClick={() => setOpenId(null)}>experience</TabsTab>
-                  <TabsTab value="stuff" style={tabStyle} onClick={() => setStravaOpen(false)}>stuff</TabsTab>
                 </TabsList>
               </div>
 
@@ -705,7 +664,7 @@ const DemoOne = () => {
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-8 pb-6">
-              {["story", "experience", "stuff"].map((tab) => (
+              {["story", "experience"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { handleTabChange(tab); if (tab === "stuff") setStravaOpen(false); if (tab === "experience") setOpenId(null); }}
