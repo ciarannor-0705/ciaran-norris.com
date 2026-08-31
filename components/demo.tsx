@@ -145,12 +145,12 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
   ]
 
   return (
-    <div className="flex flex-col gap-3">
-      <h1 className="mb-4 text-left" style={headingStyle}>
+    <div className="flex flex-col gap-3 h-full md:h-auto min-h-0">
+      <h1 className="mb-4 text-left shrink-0" style={headingStyle}>
         <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"Hi, I'm "}</BlurTextEffect>
         <CiaranHoverName />
       </h1>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible pb-24 md:pb-0">
         {storyLines.map((line, i) => (
           <motion.p
             key={i}
@@ -273,7 +273,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
   }, [setOpenId])
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 pb-24 md:pb-0">
       <ExperienceTitle />
       <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `${experiences.length * 72}px` }}>
         {experiences.map((exp, i) => (
@@ -652,8 +652,8 @@ const DemoOne = () => {
               </div>
 
               {/* Content — centered in full viewport */}
-              <div className="w-full h-full flex items-center justify-center px-6 md:px-16 md:py-16 pt-16 pb-[80px] overflow-y-auto overflow-x-hidden md:overflow-x-auto">
-                <div className="w-full max-w-3xl">
+              <div className="w-full h-full flex flex-col items-stretch justify-start overflow-hidden md:flex-row md:items-center md:justify-center px-6 md:px-16 md:py-16 pt-16 pb-6 md:pb-[80px] overflow-x-hidden md:overflow-x-auto">
+                <div className="w-full max-w-3xl h-full md:h-auto min-h-0 overflow-y-auto md:overflow-visible">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
                   <TabsPanel value="stuff"><StuffContent stravaOpen={stravaOpen} setStravaOpen={setStravaOpen} /></TabsPanel>
