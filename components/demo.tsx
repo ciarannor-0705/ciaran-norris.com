@@ -275,7 +275,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
   return (
     <div className="flex flex-col gap-3 pb-24 md:pb-0">
       <ExperienceTitle />
-      <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `max(${experiences.length * 72}px, min(60dvh, 560px))` }}>
+      <div className="relative flex flex-col w-full space-y-2 min-h-[min(60dvh,560px)] md:min-h-[360px]">
         {experiences.map((exp, i) => (
           <motion.div key={exp.id} className="flex items-center justify-between w-full border border-black/10 hover:border-black/30 rounded-lg px-4 py-4 cursor-pointer transition-colors" onClick={() => setOpenId(exp.id)}
             initial={{ opacity: 0, y: 8 }}
