@@ -654,7 +654,7 @@ const DemoOne = () => {
               {/* Content — centered in full viewport */}
               <div className="w-full h-full flex flex-col items-stretch justify-start overflow-hidden md:flex-row md:items-center md:justify-center px-6 md:px-16 md:py-16 pt-16 pb-6 md:pb-[80px] overflow-x-hidden md:overflow-x-auto">
                 <div className="w-full max-w-3xl h-full md:h-auto min-h-0 overflow-y-auto md:overflow-visible">
-                  <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
+                  <TabsPanel value="story" className="h-full md:h-auto"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
                   <TabsPanel value="stuff"><StuffContent stravaOpen={stravaOpen} setStravaOpen={setStravaOpen} /></TabsPanel>
                 </div>
@@ -662,8 +662,14 @@ const DemoOne = () => {
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-              <div className="h-10 bg-gradient-to-t from-white to-transparent" />
-              <div className="flex justify-center gap-8 bg-white pb-6 pt-1">
+              <div className="h-20 bg-gradient-to-t from-white to-transparent" />
+              <div
+                className="flex justify-center gap-8 bg-white pb-6 pt-1"
+                style={{
+                  backgroundImage: "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.12) 1.5px, transparent 0)",
+                  backgroundSize: "22px 22px",
+                }}
+              >
                 {["story", "experience"].map((tab) => (
                   <button
                     key={tab}
