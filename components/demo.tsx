@@ -150,19 +150,22 @@ const StoryContent = ({ onOpenExperience }: { onOpenExperience: (id: string) => 
         <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">{"Hi, I'm "}</BlurTextEffect>
         <CiaranHoverName />
       </h1>
-      <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible pb-24 md:pb-0">
-        {storyLines.map((line, i) => (
-          <motion.p
-            key={i}
-            className="text-base text-black/80 leading-relaxed"
-            style={{ ...interStyle, fontWeight: 500 }}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
-          >
-            {line}
-          </motion.p>
-        ))}
+      <div className="relative flex-1 min-h-0">
+        <div className="pointer-events-none absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-white to-transparent z-10 md:hidden" />
+        <div className="flex flex-col gap-3 h-full overflow-y-auto overscroll-contain md:h-auto md:overflow-visible pb-24 md:pb-0">
+          {storyLines.map((line, i) => (
+            <motion.p
+              key={i}
+              className="text-base text-black/80 leading-relaxed"
+              style={{ ...interStyle, fontWeight: 500 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut", delay: i * 0.05 }}
+            >
+              {line}
+            </motion.p>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -255,7 +258,7 @@ const experiences: Experience[] = [
 ]
 
 const ExperienceTitle = React.memo(() => (
-  <h1 className="mb-4 text-left" style={headingStyle}>
+  <h1 className="mb-4 text-left shrink-0" style={headingStyle}>
     <BlurTextEffect className="text-3xl md:text-5xl font-bold text-black/75">
       experience
     </BlurTextEffect>
@@ -273,9 +276,10 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
   }, [setOpenId])
 
   return (
-    <div className="flex flex-col gap-3 pb-24 md:pb-0">
+    <div className="flex flex-col gap-3 h-full md:h-auto min-h-0">
       <ExperienceTitle />
-      <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `max(${experiences.length * 72}px, min(60dvh, 560px))` }}>
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain md:h-auto md:overflow-visible pb-24 md:pb-0">
+      <div className="relative flex flex-col w-full space-y-2" style={{ minHeight: `${experiences.length * 72}px` }}>
         {experiences.map((exp, i) => (
           <motion.div key={exp.id} className="flex items-center justify-between w-full border border-black/10 hover:border-black/30 rounded-lg px-4 py-4 cursor-pointer transition-colors" onClick={() => setOpenId(exp.id)}
             initial={{ opacity: 0, y: 8 }}
@@ -304,7 +308,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
             <>
               <div className="fixed inset-0 z-40" onClick={() => setOpenId(null)} />
               <motion.div
-                className="absolute inset-0 bg-white rounded-lg border border-black/10 shadow-lg z-50 px-6 pt-5 pb-4 flex flex-col"
+                className="fixed inset-x-4 top-32 bottom-28 md:absolute md:inset-0 bg-white rounded-lg border border-black/10 shadow-lg z-50 px-6 pt-5 pb-4 flex flex-col"
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
@@ -354,6 +358,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
             </>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </div>
   )
@@ -653,7 +658,7 @@ const DemoOne = () => {
 
               {/* Content — centered in full viewport */}
               <div className="w-full h-full flex flex-col items-stretch justify-start overflow-hidden md:flex-row md:items-center md:justify-center px-6 md:px-16 md:py-16 pt-16 pb-6 md:pb-[80px] overflow-x-hidden md:overflow-x-auto">
-                <div className="w-full max-w-3xl h-full md:h-auto min-h-0 overflow-y-auto md:overflow-visible">
+                <div className="w-full max-w-3xl h-full md:h-auto min-h-0 overflow-hidden md:overflow-visible">
                   <TabsPanel value="story"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
                   <TabsPanel value="stuff"><StuffContent stravaOpen={stravaOpen} setStravaOpen={setStravaOpen} /></TabsPanel>
@@ -662,8 +667,14 @@ const DemoOne = () => {
             </Tabs>
             {/* Mobile bottom nav — plain buttons, outside Tabs */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-              <div className="h-10 bg-gradient-to-t from-white to-transparent" />
-              <div className="flex justify-center gap-8 bg-white pb-6 pt-1">
+              <div className="h-16 bg-gradient-to-t from-white to-transparent" />
+              <div
+                className="flex justify-center gap-8 bg-white pb-6 pt-1"
+                style={{
+                  backgroundImage: "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.12) 1.5px, transparent 0)",
+                  backgroundSize: "22px 22px",
+                }}
+              >
                 {["story", "experience"].map((tab) => (
                   <button
                     key={tab}
