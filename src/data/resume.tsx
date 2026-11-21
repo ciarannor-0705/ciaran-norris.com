@@ -33,7 +33,7 @@ export const DATA = {
       start: "June 2026",
       end: "September 2026",
       description:
-        "Zauber builds AI agents for freight forwarders, backed by Point Nine. I worked with the CEO and CCO, build their LinkedIn motion from scratch and build sales and lead generation automations. Also organized events like an executive AI dinner, and jumped on anything else on fire.",
+        "Zauber builds AI agents for freight forwarders, backed by Point Nine. I worked with the CEO and CCO, built their LinkedIn motion from scratch and built sales and lead generation automations. Also organized events like an executive AI dinner, and jumped on anything else on fire.",
     },
     {
       company: "inca",
