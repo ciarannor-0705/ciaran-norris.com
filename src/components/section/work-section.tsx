@@ -71,10 +71,18 @@ export default function WorkSection() {
               </div>
               {work.start ? (
                 <div className="flex items-center gap-1 text-xs font-normal tabular-nums text-muted-foreground text-right flex-none">
-                  <span>
+                  <span className="hidden sm:inline">
                     {work.end && String(work.end) !== String(work.start)
                       ? `${work.start} - ${work.end}`
                       : work.start}
+                  </span>
+                  <span className="sm:hidden">
+                    {(() => {
+                      const year = (d: string) => d.match(/\d{4}/)?.[0] ?? d;
+                      const a = year(String(work.start));
+                      const b = work.end ? year(String(work.end)) : a;
+                      return a === b ? a : `${a}-${b}`;
+                    })()}
                   </span>
                 </div>
               ) : null}
