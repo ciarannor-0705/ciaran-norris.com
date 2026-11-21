@@ -14,7 +14,6 @@ import HeroBadge from "@/components/ui/hero-badge"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { DestinationCard } from "@/components/ui/card-21"
-import { StravaPopup } from "@/components/ui/strava-popup"
 import { LinkCard } from "@/components/ui/card-26"
 
 
@@ -361,160 +360,7 @@ const ExperienceContent = ({ openId, setOpenId }: { openId: string | null; setOp
 
 
 
-type StravaActivity = {
-  id: number
-  name: string
-  date: string
-  distance_km: number
-  moving_time: string
-  moving_time_secs: number
-  pace: string
-  elevation_m: number
-  avg_hr: number | null
-  max_hr: number | null
-  suffer_score: number | null
-  achievements: number
-  strava_url: string
-}
-
-type StravaData = {
-  month: string
-  runs: number
-  distance_km: number
-  time_hours: number
-  elevation_m: number
-  ytd: { runs: number; distance_km: number }
-  activities: StravaActivity[]
-}
-
-const StravaIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
-    <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.599h4.172L10.463 0l-7 13.828h4.169" />
-  </svg>
-)
-
-const formatDate = (iso: string) => {
-  const d = new Date(iso)
-  return d.toLocaleDateString("en", { weekday: "short", month: "short", day: "numeric" })
-}
-
-const getPaceColor = (pace: string) => {
-  const [mins] = pace.split(":").map(Number)
-  if (mins <= 4) return "text-emerald-600"
-  if (mins <= 5) return "text-blue-600"
-  if (mins <= 6) return "text-amber-600"
-  return "text-black/60"
-}
-
-const RunCard = ({ run, index }: { run: StravaActivity; index: number }) => {
-  const [open, setOpen] = React.useState(false)
-  const isLong = run.distance_km >= 15
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.07, duration: 0.3, ease: "easeOut" }}
-      className="border border-black/8 rounded-xl overflow-hidden bg-white/50"
-    >
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="w-full text-left px-4 py-3.5 flex items-center gap-3 hover:bg-black/[0.02] transition-colors"
-      >
-        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${isLong ? "bg-[#FC4C02]/10" : "bg-black/5"}`}>
-          <svg viewBox="0 0 24 24" className={`w-4 h-4 ${isLong ? "text-[#FC4C02]" : "text-black/40"}`} fill="none" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm font-medium text-black/80 truncate" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-              {run.name}
-            </span>
-            {run.achievements > 0 && (
-              <span className="text-xs bg-amber-50 text-amber-600 border border-amber-200/60 px-1.5 py-0.5 rounded-full shrink-0">
-                🏆 {run.achievements}
-              </span>
-            )}
-          </div>
-          <span className="text-xs text-black/35" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-            {formatDate(run.date)}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-4 shrink-0">
-          <div className="text-right">
-            <div className="text-sm font-semibold text-black/75" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-              {run.distance_km} km
-            </div>
-            <div className={`text-xs font-medium ${getPaceColor(run.pace)}`} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-              {run.pace}/km
-            </div>
-          </div>
-          <motion.div animate={{ rotate: open ? 90 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronRight className="w-4 h-4 text-black/25" />
-          </motion.div>
-        </div>
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="px-4 pb-4 pt-1 border-t border-black/6">
-              <div className="grid grid-cols-3 gap-3 mb-3">
-                {[
-                  { label: "Time", value: run.moving_time },
-                  { label: "Elevation", value: `${run.elevation_m} m` },
-                  { label: "Pace", value: `${run.pace}/km` },
-                  ...(run.avg_hr ? [{ label: "Avg HR", value: `${run.avg_hr} bpm` }] : []),
-                  ...(run.max_hr ? [{ label: "Max HR", value: `${run.max_hr} bpm` }] : []),
-                  ...(run.suffer_score ? [{ label: "Suffer", value: `${run.suffer_score}` }] : []),
-                ].map(({ label, value }) => (
-                  <div key={label} className="bg-black/[0.03] rounded-lg px-3 py-2">
-                    <div className="text-[10px] text-black/35 uppercase tracking-wide mb-0.5" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-                      {label}
-                    </div>
-                    <div className="text-sm font-semibold text-black/70" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}>
-                      {value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <a
-                href={run.strava_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-[#FC4C02] hover:text-[#e04400] transition-colors font-medium"
-                style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}
-              >
-                <StravaIcon className="w-3 h-3" />
-                View on Strava
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
-const StuffContent = ({ stravaOpen, setStravaOpen }: { stravaOpen: boolean; setStravaOpen: (v: boolean) => void }) => {
-  const [stravaData, setStravaData] = React.useState<null | { ytd: { runs: number; distance_km: number }; months: { key: string; label: string; runs: { id: number; name: string; date: string; distance_km: number; duration: string; pace: string; elevation_m: number; strava_url: string }[]; distance_km: number; duration: string }[] }>(null)
-
-  React.useEffect(() => {
-    fetch("/api/strava")
-      .then(r => r.json())
-      .then(d => setStravaData(d))
-      .catch(() => {})
-  }, [])
-
+const StuffContent = () => {
   return (
     <div className="flex flex-col">
       <h1
@@ -527,23 +373,6 @@ const StuffContent = ({ stravaOpen, setStravaOpen }: { stravaOpen: boolean; setS
       </h1>
 
       <div className="relative grid grid-cols-3 gap-3 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
-        >
-          <LinkCard
-            title="strava-maxxing"
-            description="tracking every km. click to see my latest runs."
-            imageUrl="/first foto.png"
-            href="#"
-            target="_self"
-            rel=""
-            onClick={(e) => { e.preventDefault(); setStravaOpen(true); }}
-            className="cursor-pointer"
-          />
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -578,14 +407,6 @@ const StuffContent = ({ stravaOpen, setStravaOpen }: { stravaOpen: boolean; setS
           />
         </motion.div>
 
-        <AnimatePresence>
-          {stravaOpen && (
-            <StravaPopup
-              data={stravaData}
-              onClose={() => setStravaOpen(false)}
-            />
-          )}
-        </AnimatePresence>
       </div>
     </div>
   )
@@ -600,7 +421,6 @@ const DemoOne = () => {
   const phase = "story" as const
   const [activeTab, setActiveTab] = useState("story")
   const [openId, setOpenId] = useState<string | null>(null)
-  const [stravaOpen, setStravaOpen] = useState(false)
 
   const handleOpenExperience = (id: string) => {
     setActiveTab("experience")
@@ -613,7 +433,6 @@ const DemoOne = () => {
     } else {
       setActiveTab(val)
       setOpenId(null)
-      setStravaOpen(false)
     }
   }
 
@@ -656,7 +475,7 @@ const DemoOne = () => {
                 <div className="w-full max-w-3xl h-full md:h-auto min-h-0 overflow-y-auto md:overflow-visible">
                   <TabsPanel value="story" className="h-full md:h-auto"><StoryContent onOpenExperience={handleOpenExperience} /></TabsPanel>
                   <TabsPanel value="experience"><ExperienceContent openId={openId} setOpenId={setOpenId} /></TabsPanel>
-                  <TabsPanel value="stuff"><StuffContent stravaOpen={stravaOpen} setStravaOpen={setStravaOpen} /></TabsPanel>
+                  <TabsPanel value="stuff"><StuffContent /></TabsPanel>
                 </div>
               </div>
             </Tabs>
@@ -673,7 +492,7 @@ const DemoOne = () => {
                 {["story", "experience"].map((tab) => (
                   <button
                     key={tab}
-                    onClick={() => { handleTabChange(tab); if (tab === "stuff") setStravaOpen(false); if (tab === "experience") setOpenId(null); }}
+                    onClick={() => { handleTabChange(tab); if (tab === "experience") setOpenId(null); }}
                     className="cursor-pointer transition-colors text-base font-medium"
                     style={{
                       ...tabStyle,
