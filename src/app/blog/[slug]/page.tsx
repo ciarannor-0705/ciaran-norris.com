@@ -91,7 +91,7 @@ export default async function BlogPost({ params }: Props) {
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <Link
-              href="/#blog"
+              href="/"
               className="group inline-flex w-fit items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
             >
               <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
