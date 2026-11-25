@@ -6,6 +6,7 @@ import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import WorkSection from "@/components/section/work-section";
+import BlogSection from "@/components/section/blog-section";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -116,6 +117,16 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+        </div>
+      </section>
+      <section id="blog">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <h2 className="text-xl font-bold">Blog</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <BlogSection />
+          </BlurFade>
         </div>
       </section>
       <section id="contact">
