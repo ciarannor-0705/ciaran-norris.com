@@ -114,6 +114,8 @@ export default async function BlogPost({ params }: Props) {
         </div>
       </section>
 
+      <div className="-my-6 h-px w-full bg-border" aria-hidden />
+
       {post.sections.map((section, index) => (
         <section key={index}>
           <div className="flex min-h-0 flex-col gap-y-4">
